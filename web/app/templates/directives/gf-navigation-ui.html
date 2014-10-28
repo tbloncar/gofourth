@@ -1,0 +1,18 @@
+<nav class="main-nav">
+  <a href="#" ng-click="showSignInForm()" ng-hide="currentUser.signedIn">
+    <span class="sign-in-btn-label" ng-hide="display.signInForm">Sign In</span>
+    <form class="form-inline" ng-submit="signIn()" ng-show="display.signInForm">
+      <input type="email" placeholder="email" class="form-control" ng-model="session.email">
+      <input type="password" placeholder="password" class="form-control" ng-model="session.password">
+      <input type="submit" ng-click="signIn()" class="btn-sq btn-success" value="Sign In"/>
+    </form>
+  </a>
+  <a href="#" ng-click="showRegistrationForm()" ng-hide="currentUser.signedIn">
+    <span class="sign-in-btn-label" ng-hide="display.registrationForm">Register</span>
+    <form class="form-inline" ng-submit="register()" ng-show="display.registrationForm">
+      <input type="email" placeholder="email" class="form-control" ng-model="registration.email">
+      <input type="password" placeholder="password" class="form-control" ng-model="registration.password">
+      <input type="submit" ng-click="register()" class="btn-sq btn-success" value="Register"/>
+    </form>
+  </a>
+</nav>

@@ -1,11 +1,18 @@
-angular.module("app").factory('AuthenticationService', function($http) {
-  // these routes map to stubbed API endpoints in config/server.js
+// AUTHENTICATION SERVICE
+
+GF.factory("AuthenticationService", function($http) {
+
   return {
-    login: function(credentials) {
-      return $http.post('/login', credentials);
+    signIn: function(email, password) {
+      return $http.post('/api/users/sign_in', {
+        session: {
+          email: email, password: password
+        } 
+      });
     },
-    logout: function() {
-      return $http.post('/logout');
+
+    signOut: function() {
+      return $http.delete('/api/users/sign_out');
     }
   };
 });

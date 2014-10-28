@@ -24,7 +24,7 @@ module.exports = function(lineman) {
     // }
 
     server: {
-      pushState: true
+      pushState: true,
       // API Proxying
       //
       // During development, you'll likely want to make XHR (AJAX) requests to an API on the same
@@ -33,6 +33,7 @@ module.exports = function(lineman) {
       // whatever service might be running on the specified port.
       //
        apiProxy: {
+         prefix: 'api',
          enabled: true,
          host: 'localhost',
          port: 3000

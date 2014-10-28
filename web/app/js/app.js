@@ -4,15 +4,6 @@
 ------------------------------------------
 */
 
-angular.module("app", ["ngResource", "ngRoute"]).run(function($rootScope) {
-
-
-  // Helpers
-  $rootScope.log = function(thing) {
-    console.log(thing);
-  };
-
-  $rootScope.alert = function(thing) {
-    alert(thing);
-  };
+var GF = angular.module("app", ["ngResource", "ngRoute"]).run(function($rootScope, SessionService) {
+  $rootScope.currentUser = SessionService.currentUser();
 });
