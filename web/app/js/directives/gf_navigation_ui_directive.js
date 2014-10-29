@@ -24,7 +24,7 @@ GF.directive("gfNavigationUi", function(AuthenticationService, RegistrationServi
       scope.signIn = function() {
         if(scope.session.email && scope.session.password) {
           AuthenticationService.signIn(scope.session.email, scope.session.password).then(function(response) {
-            SessionService.createCurrentUser(response.email, response.authentication_token);
+            SessionService.createCurrentUser(response.data.email, response.data.authentication_token);
             swal({
               title: "Success!",
               text: "You're in!",
@@ -55,7 +55,7 @@ GF.directive("gfNavigationUi", function(AuthenticationService, RegistrationServi
           }, function(errorResponse) {
             swal({
               title: "Oops!",
-              text: "Bad email or password!",
+              text: "That account exists!",
               type: "error",
               confirmButtonText: "Okay"
             });

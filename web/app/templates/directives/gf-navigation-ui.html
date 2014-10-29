@@ -15,4 +15,14 @@
       <input type="submit" ng-click="register()" class="btn-sq btn-success" value="Register"/>
     </form>
   </a>
+  <span href="#" class="dropdown" ng-show="currentUser.signedIn">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{currentUser.email}}</a>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="#">Action</a></li>
+      <li><a href="#">Another action</a></li>
+      <li><a href="#">Something else here</a></li>
+      <li class="divider"></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </span>
 </nav>

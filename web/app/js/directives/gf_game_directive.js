@@ -76,10 +76,10 @@ GF.directive("gfGame", function() {
         var frameLength = 30,
           backgroundImg = new Image(),
           fourthOpacity = {
-            topLeft: 30,
-            topRight: 30,
-            bottomLeft: 30,
-            bottomRight: 30
+            topLeft: 70,
+            topRight: 70,
+            bottomLeft: 70,
+            bottomRight: 70
           },
           fontSize = 24,
           timer = 500,
@@ -118,7 +118,7 @@ GF.directive("gfGame", function() {
         }
 
         function restoreDefaultOpacity() {
-          for(var f in fourthOpacity) fourthOpacity[f] = 15;
+          for(var f in fourthOpacity) fourthOpacity[f] = 25;
         }
 
         function drawBoard() {
@@ -147,7 +147,7 @@ GF.directive("gfGame", function() {
 
         function drawStart() {
           ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height); 
-          ctx.font = '40px Abel';
+          ctx.font = 'italic normal 40px Oswald';
           ctx.fillStyle = '#fff';
           ctx.textAlign = 'center';
           ctx.fillText("GoFourth", midX, 200);
@@ -310,7 +310,7 @@ GF.directive("gfGame", function() {
             case 'play':
               drawBoard();
               ctx.font = fontSize.toString() + "px Abel";
-              ctx.fillStyle = "#bbb";
+              ctx.fillStyle = "#fff";
               ctx.textAlign = 'left';
               ctx.fillText(currentLevel.question, 25, headerHeight/2 + fontSize/2 - 3);
               ctx.textAlign = 'right';

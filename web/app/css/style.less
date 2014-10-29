@@ -10,6 +10,11 @@
 @c-black: #212121;
 @c-light-green: #afdd74;
 
+@ff-oswald: 'Oswald', Arial, sans-serif;
+
+/* : mixins
+--------------------------------------*/
+
 /* : ui
 --------------------------------------*/
 
@@ -35,6 +40,18 @@
   }
 }
 
+.sweet-alert {
+  border: 5px solid #ccc;
+  border-radius: 0;
+  font-family: @ff-oswald;
+  padding: 0 10px 15px;
+
+  button {
+    border: 1px solid darken(rgb(174, 222, 244), 1%);
+    border-radius: 0; 
+  }
+}
+
 .btn-sq {
   padding: 6px 15px;
 }
@@ -44,51 +61,59 @@
 --------------------------------------*/
 
 .container {
-  min-width: 960px;
+  width: 1200px;
 }
 
 body {
-  background-color: #888;
-  font-family: 'Oswald', Arial, sans-serif;
+  background: url('/img/background-wide.jpg') no-repeat;
+  font-family: @ff-oswald;
 }
 
 .main-header {
-  background-color: @c-black;
-  box-shadow: 0 5px 0 rgba(0,0,0,0.3);
   height: 70px;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .main-logo {
   color: #fff;
   display: inline-block;
-  font-family: 'Oswald', Arial, sans-serif;
+  font-family: @ff-oswald;
+  font-size: 36px;
   font-style: italic;
-  font-weight: 100;
   line-height: 70px;
   margin: 0;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+
+  sup {
+    font-size: 14px;
+    margin-left: 10px;
+    text-transform: uppercase; 
+  }
 }
 
 .main-nav {
   float: right;
   
   a {
-    border-right: 1px solid #000;
-    box-shadow: 1px 0 0 rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
     color: #fff;
     display: inline-block;
-    line-height: 70px; 
-    margin-left: -2px;
+    font-size: 18px;
+    font-weight: 100;
+    line-height: 50px; 
+    margin-right: 15px;
+    margin-top: 5px;
     padding: 0 25px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+    transition: background 1s;
 
-    &:first-of-type {
-      border-left: 1px solid #000; 
-      box-shadow: 1px 0 0 rgba(255,255,255,0.1), 
-                  inset 1px 0 0 rgba(255,255,255,0.1);
+    &:last-of-type {
+      margin-right: 0; 
     }
 
     &:hover {
-      background-color: rgba(0,0,0,0.2);
+      background: rgba(0,0,0,0.3);
       text-decoration: none; 
     }
   }
@@ -96,10 +121,16 @@ body {
 
 .game-container {
   border: 5px solid #ccc;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  float: left;
   width: 500px;
 }
 
-.main-cp {
-  border: 5px solid #aaa;
+.main-cp-container {
+  background: rgba(0,0,0,0.4);
+  border: 5px solid #ccc;
+  float: left;
   height: 500px;
+  margin-left: 20px;
+  width: 680px;
 }
