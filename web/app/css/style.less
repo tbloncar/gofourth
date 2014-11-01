@@ -9,6 +9,8 @@
 
 @c-black: #212121;
 @c-light-green: #afdd74;
+@c-orange: #ffc966;
+@c-red: #cd5c5c;
 
 @ff-oswald: 'Oswald', Arial, sans-serif;
 
@@ -29,17 +31,6 @@
   }
 }
 
-.form-inline {
-  .form-control {
-    margin-right: 10px; 
-    width: 200px;
-    
-    &:last-of-type {
-      margin-right: 0; 
-    }
-  }
-}
-
 .sweet-alert {
   border: 5px solid #ccc;
   border-radius: 0;
@@ -52,8 +43,63 @@
   }
 }
 
-.btn-sq {
-  padding: 6px 15px;
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer;  } // angular-ui/bootstrap
+
+.modal-content {
+  background: rgba(0,0,0,0.64);
+  border: 5px solid #ccc;
+  border-radius: 0;
+  margin: 190px auto;
+  width: 450px;
+}
+
+.modal-title {
+  color: #fff;
+  text-align: center;
+}
+
+.modal-header {
+  border-bottom: 1px solid #444;
+}
+
+.modal-footer {
+  border-top: 1px solid #444;
+}
+
+.modal-form {
+
+  .form-control {
+    border: 5px solid #ccc; 
+    border-radius: 0;
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+
+  .form-error {
+    background-color: @c-red;
+    border: 1px solid darken(@c-red, 3%);
+    color: #fff;
+    margin-bottom: 20px;
+    padding: 12px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+  }
+
+  .btn-submit {
+    background-color: @c-orange;
+    border: none;
+    border-bottom: 4px solid darken(@c-orange, 10%);
+    color: #fff;
+    font-size: 16px;
+    line-height: 33px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+    transition: all 1s;
+    width: 100%;
+
+    &:hover {
+      background-color: darken(@c-orange, 5%); 
+      border-color: darken(@c-orange, 15%);
+    }
+  }
 }
 
 
@@ -72,6 +118,20 @@ body {
 .main-header {
   height: 70px;
   margin: 20px 0;
+
+  .form-inline {
+    display: inline-block;
+
+    .form-control {
+      height: 47px;
+      margin-right: 10px; 
+      width: 200px;
+      
+      &:last-of-type {
+        margin-right: 0; 
+      }
+    }
+  }
 }
 
 .main-logo {
@@ -133,4 +193,29 @@ body {
   height: 500px;
   margin-left: 20px;
   width: 680px;
+}
+
+.main-cp-header {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4),
+              0 1px 0 rgba(255,255,255,0.3);
+  height: 60px;
+
+  a {
+    border-right: 1px solid #232323;
+    box-shadow: inset -1px 0 0 rgba(255,255,255,0.17);
+    color: #fff;
+    display: inline-block; 
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 60px;
+    margin-right: -2px;
+    padding: 0 15px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    transition: all 1s;
+
+    &:hover {
+      background: rgba(0,0,0,0.17);
+      text-decoration: none; 
+    }
+  }
 }

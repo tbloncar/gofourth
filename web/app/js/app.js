@@ -4,6 +4,6 @@
 ------------------------------------------
 */
 
-var GF = angular.module("app", ["ngResource", "ngRoute"]).run(function($rootScope, SessionService) {
+var GF = angular.module("app", ["ngResource", "ngRoute", "ui.bootstrap"]).run(function($rootScope, SessionService) {
   $rootScope.currentUser = SessionService.currentUser();
 });

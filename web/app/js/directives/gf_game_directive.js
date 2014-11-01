@@ -363,7 +363,7 @@ GF.directive("gfGame", function() {
 
         function draw() {
           if(!rocketLoaded) return;
-          ctx.fillStyle = 'rgba(255,255,255,0.1)';
+          ctx.fillStyle = 'rgba(255,255,255,0.2)';
           ctx.beginPath();
           ctx.arc(x, y, width/1.5, 0, 2 * Math.PI);
           ctx.fill();

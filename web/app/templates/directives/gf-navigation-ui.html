@@ -1,19 +1,9 @@
 <nav class="main-nav">
   <a href="#" ng-click="showSignInForm()" ng-hide="currentUser.signedIn">
-    <span class="sign-in-btn-label" ng-hide="display.signInForm">Sign In</span>
-    <form class="form-inline" ng-submit="signIn()" ng-show="display.signInForm">
-      <input type="email" placeholder="email" class="form-control" ng-model="session.email">
-      <input type="password" placeholder="password" class="form-control" ng-model="session.password">
-      <input type="submit" ng-click="signIn()" class="btn-sq btn-success" value="Sign In"/>
-    </form>
+    <span class="sign-in-btn-label">Sign In</span>
   </a>
   <a href="#" ng-click="showRegistrationForm()" ng-hide="currentUser.signedIn">
-    <span class="sign-in-btn-label" ng-hide="display.registrationForm">Register</span>
-    <form class="form-inline" ng-submit="register()" ng-show="display.registrationForm">
-      <input type="email" placeholder="email" class="form-control" ng-model="registration.email">
-      <input type="password" placeholder="password" class="form-control" ng-model="registration.password">
-      <input type="submit" ng-click="register()" class="btn-sq btn-success" value="Register"/>
-    </form>
+    <span class="sign-in-btn-label">Register</span>
   </a>
   <span href="#" class="dropdown" ng-show="currentUser.signedIn">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{currentUser.email}}</a>
@@ -25,4 +15,41 @@
       <li><a href="#">Separated link</a></li>
     </ul>
   </span>
+  <script type="text/ng-template" id="gf-sign-in-modal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Sign In</h3>
+    </div>
+    <div class="modal-body">
+      <form ng-submit="signIn()" class="modal-form">
+        <input type="email" placeholder="email" class="form-control" ng-model="session.email">
+        <input type="password" placeholder="password" class="form-control" ng-model="session.password">
+        <p class="form-error" ng-show="display.signInFormError">
+          {{display.signInFormError}} 
+        </p>
+        <input type="submit" class="btn-submit" value="{{display.signInBtnText}}"/>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#">Forgot password?</a>
+    </div>
+  </script>
+  <script type="text/ng-template" id="gf-register-modal.html">
+    <div class="modal-header">
+      <h3 class="modal-title">Create Account</h3>
+    </div>
+    <div class="modal-body">
+      <form ng-submit="register()" class="modal-form">
+        <input type="email" placeholder="email" class="form-control" ng-model="registration.email">
+        <input type="password" placeholder="password" class="form-control" ng-model="registration.password">
+        <p class="form-error" ng-show="display.registerFormError">
+          {{display.registerFormError}} 
+        </p>
+        <input type="submit" class="btn-submit" value="{{display.registerBtnText}}"/>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#">Privacy Policy</a>
+    </div>
+  </script>
 </nav>
+
