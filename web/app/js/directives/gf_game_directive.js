@@ -22,8 +22,7 @@ function CanvasUtils(context) {
 }
 
 function GameView($canvas, backgroundImageSrc) {
-  var self, 
-      canvas = $canvas[0], 
+  var canvas = $canvas[0], 
       context = canvas.getContext('2d'),
       canvasUtils = new CanvasUtils(context),
       headerHeight = 80,
@@ -31,7 +30,8 @@ function GameView($canvas, backgroundImageSrc) {
       midPoint = new Point(canvas.width/2, (headerHeight + canvas.height)/2),
       fontSize = 24,
       backgroundImage = new Image(),
-      defaultOpacity = 70,
+      backgroundImageLoaded = false,
+      defaultOpacity = 30,
       fourthOpacity = {
         topLeft: defaultOpacity,
         topRight: defaultOpacity,
@@ -46,58 +46,58 @@ function GameView($canvas, backgroundImageSrc) {
   this.dimensions = viewDimensions;
 
   backgroundImage.onload = function() {
-    self.drawGameBoard(); 
+    drawGameBoard(); 
   };
 
   backgroundImage.src = backgroundImageSrc;
 
-  this.draw = function(gameState, piece, currentLevel) {
+  this.draw = function(state, piece, currentLevel, topScore, timer) {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    switch(gameState.getState()) {
-      case state.START:
-        drawStart();
+    switch(state.getState()) {
+      case gameState.START:
+        drawStart(topScore);
         break;
-      case state.PLAY:
-        drawBoard();
-        ctx.font = fontSize.toString() + "px Abel";
-        ctx.fillStyle = "#fff";
-        ctx.textAlign = 'left';
-        ctx.fillText(currentLevel.question, 25, headerHeight/2 + fontSize/2 - 3);
-        ctx.textAlign = 'right';
-        ctx.fillText(timer, canvas.width - 25, headerHeight/2 + fontSize/2 - 3);
-        ctx.textAlign = 'center';
-        ctx.fillText(currentLevel.choices[0], fourthDimensions.width/2, headerHeight + fourthDimensions.height/2);
-        ctx.fillText(currentLevel.choices[1], midPoint.x + fourthDimensions.width/2, headerHeight + fourthDimensions.height/2);
-        ctx.fillText(currentLevel.choices[2], midPoint.x + fourthDimensions.width/2, midPoint.y + fourthDimensions.height/2);
-        ctx.fillText(currentLevel.choices[3], fourthDimensions.width/2, midPoint.y + fourthDimensions.height/2);
+      case gameState.PLAY:
+        drawGameBoard();
+        context.font = fontSize.toString() + "px Abel";
+        context.fillStyle = "#fff";
+        context.textAlign = 'left';
+        context.fillText(currentLevel.question, 25, headerHeight/2 + fontSize/2 - 3);
+        context.textAlign = 'right';
+        context.fillText(timer, canvas.width - 25, headerHeight/2 + fontSize/2 - 3);
+        context.textAlign = 'center';
+        context.fillText(currentLevel.choices[0], fourthDimensions.width/2, headerHeight + fourthDimensions.height/2);
+        context.fillText(currentLevel.choices[1], midPoint.x + fourthDimensions.width/2, headerHeight + fourthDimensions.height/2);
+        context.fillText(currentLevel.choices[2], midPoint.x + fourthDimensions.width/2, midPoint.y + fourthDimensions.height/2);
+        context.fillText(currentLevel.choices[3], fourthDimensions.width/2, midPoint.y + fourthDimensions.height/2);
 
         piece.draw();
 
         break;
-      case state.WIN:
+      case gameState.WIN:
         drawWin();
         break;
-      case state.LOSE:
+      case gameState.LOSE:
         drawLose();
         break;
     }
   };
 
-  this.drawGameBoard = function() {
+  function drawGameBoard() {
     context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
     context.fillStyle = backgroundColors().topLeft;
     context.fillRect(0, headerHeight, fourthDimensions.width, fourthDimensions.height);
     context.fillStyle = backgroundColors().topRight;
     context.fillRect(fourthDimensions.width, headerHeight, fourthDimensions.width, fourthDimensions.height);
     context.fillStyle = backgroundColors().bottomRight;
-    context.fillRect(0, midPoint.y, fourthDimensions.width, fourthDimensions.height);
-    context.fillStyle = backgroundColors().bottomLeft;
     context.fillRect(fourthDimensions.width, midPoint.y, fourthDimensions.width, fourthDimensions.height);
+    context.fillStyle = backgroundColors().bottomLeft;
+    context.fillRect(0, midPoint.y, fourthDimensions.width, fourthDimensions.height);
 
     restoreDefaultOpacity();
   };
 
-  this.drawStart = function() {
+  function drawStart(topScore) {
     // Draw background
     context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); 
 
@@ -119,7 +119,7 @@ function GameView($canvas, backgroundImageSrc) {
     context.fillText("High Score: " + topScore, 15, canvas.height - 15);
   }
 
-  this.drawWin = function(score) {
+  function drawWin(score) {
     ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
     ctx.font = "40px Abel";
     ctx.fillStyle = "#fff";
@@ -132,7 +132,7 @@ function GameView($canvas, backgroundImageSrc) {
     ctx.fillText("Main Menu (M)  Play Again (P)", midPoint.x, 350);
   };
 
-  this.drawLose = function(score, topScore) {
+  function drawLose(score, topScore) {
     ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
     ctx.font = "40px Abel";
     ctx.fillStyle = "#fff";
@@ -150,15 +150,15 @@ function GameView($canvas, backgroundImageSrc) {
 
     if(inTopLeft(piece)) {
       pieceFourth = "topLeft";
-    } else if(inTopRight(rocket)) {
+    } else if(inTopRight(piece)) {
       pieceFourth = "topRight";
-    } else if(inBottomLeft(rocket)) {
+    } else if(inBottomLeft(piece)) {
       pieceFourth = "bottomLeft";
-    } else if(inBottomRight(rocket)) {
+    } else if(inBottomRight(piece)) {
       pieceFourth = "bottomRight";
     }
 
-    if(pieceFourth) fourthOpacity[pieceFourth] = 40;
+    if(pieceFourth) fourthOpacity[pieceFourth] = 60;
   }
 
   this.getFourth = function(obj) {
@@ -180,7 +180,7 @@ function GameView($canvas, backgroundImageSrc) {
       topLeft: 'rgba(255,185,15,0.' + fourthOpacity.topLeft + ')',
       topRight: 'rgba(125,38,205,0.' + fourthOpacity.topRight + ')',
       bottomRight: 'rgba(127,255,0,0.' + fourthOpacity.bottomRight + ')',
-      topRight: 'rgba(205,0,0,0.' + fourthOpacity.topRight + ')'
+      bottomLeft: 'rgba(205,0,0,0.' + fourthOpacity.bottomLeft + ')'
     };
   }
 
@@ -189,19 +189,19 @@ function GameView($canvas, backgroundImageSrc) {
   }
 
   function inTopLeft(obj) {
-    if(obj.position.x < midPoint.x && obj.position.y < midPoint.y) return true;
+    if(obj.position().x < midPoint.x && obj.position().y < midPoint.y) return true;
   }
 
   function inTopRight(obj) {
-    if(obj.position.x > midPoint.x && obj.position.y < midPoint.y) return true;
+    if(obj.position().x > midPoint.x && obj.position().y < midPoint.y) return true;
   }
 
   function inBottomLeft(obj) {
-    if(obj.position.x < midPoint.x && obj.position.y > midPoint.y) return true;
+    if(obj.position().x < midPoint.x && obj.position().y > midPoint.y) return true;
   }
 
   function inBottomRight(obj) {
-    if(obj.position.x > midPoint.x && obj.position.y > midPoint.y) return true;
+    if(obj.position().x > midPoint.x && obj.position().y > midPoint.y) return true;
   }
 }
 
@@ -209,7 +209,8 @@ function GamePiece(gameView, moveDistance, dimensions, imageSrc) {
   var image = new Image(),
       imageLoaded = false,
       frame = 0,
-      position = new Point(0, 0),
+      position = new Point(gameView.dimensions.width / 2, gameView.dimensions.height / 2 + gameView.headerHeight / 2),
+      initialPosition = position,
       context = gameView.context,
       minPoint = new Point(dimensions.width / 2, gameView.headerHeight + dimensions.height / 2),
       maxPoint = new Point(gameView.dimensions.width - dimensions.width / 2, gameView.dimensions.height - dimensions.height / 2),
@@ -221,6 +222,10 @@ function GamePiece(gameView, moveDistance, dimensions, imageSrc) {
 
   image.src = imageSrc;
 
+  this.position = function() {
+    return position; 
+  };
+ 
   this.draw = function() {
     if(!imageLoaded) return; 
 
@@ -234,7 +239,7 @@ function GamePiece(gameView, moveDistance, dimensions, imageSrc) {
   };
 
   this.moveRight = function() {
-    position.x = position.x.clamp(x + mD, maxPoint.x); 
+    position.x = position.x.clamp(position.x + mD, maxPoint.x); 
     frame = 2;
   };
 
@@ -253,8 +258,8 @@ function GamePiece(gameView, moveDistance, dimensions, imageSrc) {
     frame = 1;
   };
 
-  this.resetPosition = function() {
-    this.position = new Point(0, 0);     
+  this.reset = function() {
+    position = initialPosition;     
     frame = 0;
   };
 }
@@ -284,8 +289,9 @@ function GameState() {
 }
 
 function GameLevels(levels) {
-  var levelIndex = 0,
-      levels = load(levels);
+  var levelIndex = 0;
+  
+  load(levels);
 
   this.current = function() {
     return levels[levelIndex]; 
@@ -329,7 +335,7 @@ function Game(name, $elm, scope, gameLevels) {
 
   function gameLoop() {
     update();
-    view.draw(state, piece, levels.current());
+    view.draw(state, piece, levels.current(), topScore, timer);
 
     setTimeout(gameLoop, frameLength);
   }
@@ -364,12 +370,12 @@ function Game(name, $elm, scope, gameLevels) {
   }
 
   function resetGame() {
-    this.piece.reset();
+    piece.reset();
 
     timer = 500;
     score = 0;  
     levels.reset();
-    state = state.PLAY;
+    state.toPlay();
   }
 
   function setTopScore(s) {
@@ -401,7 +407,7 @@ GF.directive('gfGameBeta', function() {
     restrict: 'A',
     replace: false,
     link: function(scope, $elm, attrs) {
-      var LEVELS = [
+      var levels = [
         {
           question: "sqrt(5! - (-1))",
           choices: [22, 12, 5, 11],
@@ -456,7 +462,9 @@ GF.directive('gfGameBeta', function() {
 
       var game = new Game('Demo Game', $elm, scope, levels);
 
-      game.go();
+      $(document).ready(function() {
+        game.go();
+      });
     }
   };
 });
