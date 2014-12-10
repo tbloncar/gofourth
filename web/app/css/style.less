@@ -9,7 +9,7 @@
 
 @c-black: #212121;
 @c-light-green: #afdd74;
-@c-orange: #ffc966;
+@c-orange: #ffb732;
 @c-red: #cd5c5c;
 
 @ff-oswald: 'Oswald', Arial, sans-serif;
@@ -64,6 +64,14 @@
 
 .modal-footer {
   border-top: 1px solid #444;
+
+  a {
+    color: #fff; 
+
+    &:hover {
+      color: #fff; 
+    }
+  }
 }
 
 .modal-form {
@@ -87,7 +95,7 @@
   .btn-submit {
     background-color: @c-orange;
     border: none;
-    border-bottom: 4px solid darken(@c-orange, 10%);
+    border-bottom: 4px solid darken(@c-orange, 20%);
     color: #fff;
     font-size: 16px;
     line-height: 33px;
@@ -97,7 +105,7 @@
 
     &:hover {
       background-color: darken(@c-orange, 5%); 
-      border-color: darken(@c-orange, 15%);
+      border-color: darken(@c-orange, 25%);
     }
   }
 }
@@ -118,20 +126,6 @@ body {
 .main-header {
   height: 70px;
   margin: 20px 0;
-
-  .form-inline {
-    display: inline-block;
-
-    .form-control {
-      height: 47px;
-      margin-right: 10px; 
-      width: 200px;
-      
-      &:last-of-type {
-        margin-right: 0; 
-      }
-    }
-  }
 }
 
 .main-logo {
@@ -217,5 +211,16 @@ body {
       background: rgba(0,0,0,0.17);
       text-decoration: none; 
     }
+  }
+}
+
+.main-cp-content {
+  color: #fff;
+  padding: 25px;
+
+  h2 {
+    font-size: 18px; 
+    font-weight: 100;
+    margin: 0;
   }
 }

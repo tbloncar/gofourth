@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-ng-app="app">
   <head>
-    <title><%= pkg.name %></title>
+    <title>GoFourth | Studying Meets Space</title>
     <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/css/app.css" media="all" />
@@ -9,7 +9,7 @@
   <body>
     <header class="main-header">
       <div class="container">
-        <h1 class="main-logo">GoFourth<sup>ForeverBeta</sup></h1>
+        <h1 class="main-logo">GoFourth<sup>Beta</sup></h1>
         <nav data-gf-navigation-ui ></nav>
       </div>
     </header>
