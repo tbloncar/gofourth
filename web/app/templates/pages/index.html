@@ -4,12 +4,22 @@
         width="500" height="500"></canvas>
     <div class="main-cp-container">
       <div class="main-cp-header">
-        <a href="#">Dashboard</a>
-        <a href="#">Browse Games</a>
+        <a href="#" ng-click="uiState.setState('dashboard')">Dashboard</a>
+        <a href="#" ng-click="uiState.setState('browse')">Browse Games</a>
       </div>
       <section class="main-cp-content">
-        <div ng-hide="session.currentUser">
-          <!--<h2>Recent Games</h2>-->
+        <div ng-show="uiState.getState() == 'dashboard'">
+          <div ng-hide="currentUser.signedIn" class="no-session-content">
+            <p>Sign in to save games and create your own!</p>
+          </div>
+          <div class="db-recent-game-container" ng-repeat="game in recentGames">
+            <span class="db-recent-game-inline db-recent-game-inline--index">{{$index + 1}}</span>
+            <span class="db-recent-game-inline db-recent-game-inline--name">{{game.name}}</span>
+            <span class="db-recent-game-inline db-recent-game-inline--score">{{game.score}}</span>
+          </div>
+        </div>
+        <div ng-show="uiState.getState() == 'browse'">
+          Browse
         </div>
       </section>
     </div>

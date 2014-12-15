@@ -317,10 +317,11 @@ function GameLevels(levels) {
   }
 }
 
-function Game(name, $elm, scope, gameLevels) {
+function Game(name, $elm, scope, gameLevels, recentGamesService) {
   var name = name,
     state = new GameState(),
     view = new GameView($elm, 'img/background.jpg'),
+    recentGameAdded = false,
     frameLength = 30,
     piece = new GamePiece(view, 10, new Dimensions(49, 49), 'img/rocket-sprite.png'),
     levels = new GameLevels(gameLevels),
@@ -342,7 +343,10 @@ function Game(name, $elm, scope, gameLevels) {
   function update() {
     switch(state.getState()) {
       case gameState.START:
-        if(keydown.space) resetGame();
+        if(keydown.space) {
+          resetGame();
+          state.toPlay();
+        }
         break;
       case gameState.PLAY:
         if(timer > 0) {
@@ -359,20 +363,35 @@ function Game(name, $elm, scope, gameLevels) {
         break;
       case gameState.WIN:
       case gameState.LOSE:
+        if(!recentGameAdded) {
+          addRecentGame();   
+        }
         if(score > topScore) setTopScore(score);
-        if(keydown.p) resetGame();
-        if(keydown.m) state.toStart();
+        if(keydown.p) {
+          resetGame();
+          state.toPlay();
+        }
+        if(keydown.m) {
+          state.toStart();
+          resetGame();
+        }
         break;
     }
   }
 
+  function addRecentGame() {
+    recentGamesService.addGame({ name: name, score: score, timestamp: new Date() });
+    recentGameAdded = true;
+  }
+
   function resetGame() {
+    recentGameAdded = false;
+
     piece.reset();
 
     timer = 500;
     score = 0;  
     levels.reset();
-    state.toPlay();
   }
 
   function setTopScore(s) {
@@ -399,7 +418,7 @@ function Game(name, $elm, scope, gameLevels) {
   }
 }
 
-GF.directive('gfGame', function() {
+GF.directive('gfGame', function(RecentGamesService) {
   return {
     restrict: 'A',
     replace: false,
@@ -457,7 +476,7 @@ GF.directive('gfGame', function() {
         }
       ];
 
-      var game = new Game('Demo Game', $elm, scope, levels);
+      var game = new Game('Demo Game', $elm, scope, levels, RecentGamesService);
 
       $(document).ready(function() {
         game.go();

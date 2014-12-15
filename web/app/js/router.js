@@ -4,7 +4,7 @@ angular.module("app").config(function($routeProvider, $locationProvider) {
 
   $routeProvider.when('/', {
     templateUrl: 'pages/index.html',
-    controller: 'ApplicationController'
+    controller: 'ApplicationCtrl'
   });
 
   $routeProvider.otherwise({ redirectTo: '/' });
