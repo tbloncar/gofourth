@@ -21,7 +21,9 @@
         <div ng-show="uiState.getState() == 'browse'">
           <input type="text" style="width:300px;" class="form-control" placeholder="Browse games..." ng-model="browseQuery">
           <br>
-          <div class="game-choice" ng-repeat="game in gameChoices | filter: { name: browseQuery }">
+          <div class="game-choice"
+            ng-repeat="game in gameChoices | filter: { name: browseQuery }"
+            ng-click="actions.activateGame(game)">
             <h3 class="game-choice_name">{{game.name}}</h3>
             <p class="game-choice_description">{{game.description}}</p>
           </div>

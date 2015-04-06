@@ -66,10 +66,10 @@ function GameView($canvas, backgroundImageSrc) {
         context.textAlign = 'right';
         context.fillText(timer, canvas.width - 25, headerHeight/2 + fontSize/2);
         context.textAlign = 'center';
-        context.fillText(currentLevel.choices[0], fourthDimensions.width/2, headerHeight + fourthDimensions.height/2);
-        context.fillText(currentLevel.choices[1], midPoint.x + fourthDimensions.width/2, headerHeight + fourthDimensions.height/2);
-        context.fillText(currentLevel.choices[2], midPoint.x + fourthDimensions.width/2, midPoint.y + fourthDimensions.height/2);
-        context.fillText(currentLevel.choices[3], fourthDimensions.width/2, midPoint.y + fourthDimensions.height/2);
+        context.fillText(currentLevel.answers[0].label, fourthDimensions.width/2, headerHeight + fourthDimensions.height/2);
+        context.fillText(currentLevel.answers[1].label, midPoint.x + fourthDimensions.width/2, headerHeight + fourthDimensions.height/2);
+        context.fillText(currentLevel.answers[2].label, midPoint.x + fourthDimensions.width/2, midPoint.y + fourthDimensions.height/2);
+        context.fillText(currentLevel.answers[3].label, fourthDimensions.width/2, midPoint.y + fourthDimensions.height/2);
 
         piece.draw();
 
@@ -311,7 +311,7 @@ function GameLevels(levels) {
 
   function load(lvls) {
     levels = _.map(_.shuffle(lvls), function(lvl) {
-      lvl.choices = _.shuffle(lvl.choices); 
+      lvl.answers = _.shuffle(lvl.answers); 
       return lvl;
     });     
   }
@@ -327,7 +327,7 @@ function Game(name, $elm, scope, gameLevels, recentGamesService) {
     levels = new GameLevels(gameLevels),
     timer = 500,
     score = 0,
-    topScore = localStorage['gf-top-score'];
+    topScore = localStorage['gf-top-score'] || 0;
   
   this.go = function() {
     gameLoop(); 
@@ -413,8 +413,15 @@ function Game(name, $elm, scope, gameLevels, recentGamesService) {
   }
 
   function correctAnswer() {
-    var answer = levels.current().answer;
-    return view.getFourth(piece) === levels.current().choices.indexOf(answer) ? true : false;
+    var correctAnswerIndexes = [];
+
+    for(var i = 0; i < 4; i++) {
+      if(levels.current().answers[i].is_correct) {
+        correctAnswerIndexes.push(i); 
+      } 
+    }
+
+    return _.contains(correctAnswerIndexes, view.getFourth(piece));
   }
 }
 
@@ -423,63 +430,14 @@ GF.directive('gfGame', function(RecentGamesService) {
     restrict: 'A',
     replace: false,
     link: function(scope, $elm, attrs) {
-      var levels = [
-        {
-          question: "sqrt(5! - (-1))",
-          choices: [22, 12, 5, 11],
-          answer: 11
-        },
-        {
-          question: "7!/6!",
-          choices: [1, 7, 42, 6],
-          answer: 7
-        },
-        {
-          question: "sqrt(5! + 4!)",
-          choices: [11, 14, 8, 12],
-          answer: 12
-        },
-        {
-          question: "1 + 1 / 1 - 1",
-          choices: [11, 1, 0, 2],
-          answer: 1
-        },
-        {
-          question: "sqrt(4! + (3! * 2))",
-          choices: [5, 17, 6, 24],
-          answer: 6
-        },
-        {
-          question: "3 * 4^2",
-          choices: [48, 54, 18, 12],
-          answer: 48
-        },
-        {
-          question: "(22 + 2) / 3!",
-          choices: [12, 9, 6, 4],
-          answer: 4
-        },
-        {
-          question: "8^8 / 8^7",
-          choices: ["16,777,216", 8, 48, "160,000"],
-          answer: 8
-        },
-        {
-          question: "1 + 2 + 3 + 4",
-          choices: [11, 8, 9, 10],
-          answer: 10
-        },
-        {
-          question: "(7! / 10) - 500",
-          choices: [1, 200, 75, 4],
-          answer: 4
-        }
-      ];
-
-      var game = new Game('Demo Game', $elm, scope, levels, RecentGamesService);
-
       $(document).ready(function() {
-        game.go();
+        scope.$watch('activeGame', function(gameChoice) {
+          if(!gameChoice) { return; }
+
+          var game = new Game(gameChoice.name, $elm, scope, gameChoice.levels, RecentGamesService);
+
+          game.go();
+        });
       });
     }
   };
