@@ -9,6 +9,8 @@ Rails.application.routes.draw do
         post    "sessions" => "sessions#create"
         delete  "sessions" => "sessions#destroy"
       end
+
+      resources :games, only: [:index]
     end
   end
 end

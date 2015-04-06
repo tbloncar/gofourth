@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
 
-  before_action :authenticate
-
   TOKENEXPIRESIN = 2.days
 
   def current_user

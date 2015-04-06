@@ -11,10 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140811221217) do
+ActiveRecord::Schema.define(version: 20150403224717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: true do |t|
+    t.string   "label"
+    t.boolean  "is_correct", default: false
+    t.integer  "level_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["level_id"], name: "index_answers_on_level_id", using: :btree
+
+  create_table "games", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "levels", force: true do |t|
+    t.text     "question"
+    t.integer  "game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "levels", ["game_id"], name: "index_levels_on_game_id", using: :btree
+
+  create_table "plays", force: true do |t|
+    t.integer  "score"
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "plays", ["game_id", "user_id"], name: "index_plays_on_game_id_and_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

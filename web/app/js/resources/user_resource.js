@@ -4,6 +4,6 @@
 ------------------------------------------
 */
 
-angular.module("app").factory("UserResource", function($q, $resource) {
-  return $resource('/users');
+GF.factory("UserResource", function($q, $resource, SettingsConst) {
+  return $resource(SettingsConst.apiUrl + '/users');
 });
