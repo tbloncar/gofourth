@@ -1,15 +1,11 @@
 require 'api_constraints'
 
 Rails.application.routes.draw do
-  devise_for :users
+  mount_devise_token_auth_for 'User', at: 'auth'
+  #devise_for :users
 
   namespace :api do
     scope module: :v1, constraints: APIConstraints.new(version: 1, default: true) do
-      devise_for :users do
-        post    "sessions" => "sessions#create"
-        delete  "sessions" => "sessions#destroy"
-      end
-
       resources :games, only: [:index]
     end
   end

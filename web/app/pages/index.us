@@ -9,7 +9,7 @@
   <body>
     <header class="main-header">
       <div class="container">
-        <h1 class="main-logo">GoFourth<sup>ForeverBeta</sup></h1>
+        <h1 class="main-logo">GoFourth<sup>Beta</sup></h1>
         <nav data-gf-navigation-ui ></nav>
       </div>
     </header>

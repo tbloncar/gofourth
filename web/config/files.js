@@ -13,6 +13,7 @@ module.exports = function(lineman) {
         "vendor/js/es6-shim.js",
         "vendor/js/jquery-1.11.0.min.js",
         "vendor/js/angular.js",
+        "vendor/js/angular-cookie.js",
         "vendor/js/**/*.js"
       ],
       app: [

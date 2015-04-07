@@ -1,26 +1,23 @@
 // REGISTRATION SERVICE
 
-GF.factory("RegistrationService", function($http, $q, AuthenticationService) {
+GF.factory("RegistrationService", function($q, $auth) {
 
   return {
     register: function(email, password) {
       var deferred = $q.defer();
 
-      $http.post('/api/users', {
-        user: {
-          email: email, password: password,
-          password_confirmation: password
-        } 
-      }).success(function(responseReg) {
-          AuthenticationService.signIn(email, password).success(function(responseAuth) {
-            deferred.resolve(responseAuth); 
-          }).error(function(errorResponse) {
-            deferred.reject(errorResponse); 
-          });
-      }).error(function(errorResponse) {
-        deferred.reject(errorResponse); 
+      $auth.submitRegistration({
+        email: email,
+        password: password,
+        password_confirmation: password
+      })
+      .then(function(resp) {
+        deferred.resolve(resp); 
+      })
+      .catch(function(resp) {
+        deferred.reject(resp); 
       });
-
+     
       return deferred.promise;
     } 
   };
