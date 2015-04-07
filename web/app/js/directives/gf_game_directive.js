@@ -322,18 +322,26 @@ function Game(name, $elm, scope, gameLevels, recentGamesService) {
     state = new GameState(),
     view = new GameView($elm, 'img/background.jpg'),
     recentGameAdded = false,
+    gameHalted = false,
     frameLength = 30,
     piece = new GamePiece(view, 10, new Dimensions(49, 49), 'img/rocket-sprite.png'),
     levels = new GameLevels(gameLevels),
     timer = 500,
     score = 0,
     topScore = localStorage['gf-top-score'] || 0;
+
+  // Listen for game:stop to halt game loop
+  scope.$on('game:stop', function() {
+    gameHalted = true; 
+  });
   
   this.go = function() {
     gameLoop(); 
   };
 
   function gameLoop() {
+    if(gameHalted) { return; }
+
     update();
     view.draw(state, piece, levels.current(), topScore, timer, score);
 
@@ -425,14 +433,20 @@ function Game(name, $elm, scope, gameLevels, recentGamesService) {
   }
 }
 
-GF.directive('gfGame', function(RecentGamesService) {
+GF.directive('gfGame', function($rootScope, RecentGamesService) {
   return {
     restrict: 'A',
     replace: false,
     link: function(scope, $elm, attrs) {
       $(document).ready(function() {
+        var canvas = $elm[0];
+
         scope.$watch('activeGame', function(gameChoice) {
           if(!gameChoice) { return; }
+
+          // Start fresh
+          canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+          $rootScope.$broadcast('game:stop');
 
           var game = new Game(gameChoice.name, $elm, scope, gameChoice.levels, RecentGamesService);
 

@@ -292,8 +292,14 @@ body {
   background-color: @c-black-dim;
   border: 2px solid @c-gray-border;
   box-sizing: border-box;
+  float: left;
+  margin-right: 6%;
   padding: 15px 10px;
-  width: 45%;
+  width: 47%;
+
+  &:nth-of-type(2n) {
+    margin-right: 0; 
+  }
 
   &:hover {
     background-color: fadein(@c-black-dim, 10%);
