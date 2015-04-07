@@ -1,5 +1,5 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :name, :description
+  attributes :id, :name, :description
 
   has_many :levels
 end

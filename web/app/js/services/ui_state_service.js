@@ -7,6 +7,10 @@ GF.factory("UIStateService", function() {
   };
 
   return {
+    is: function(checkState) {
+      return state[checkState]; 
+    },
+
     setState: function(newState) {
       for(var k in state) {
         state[k] = false; 

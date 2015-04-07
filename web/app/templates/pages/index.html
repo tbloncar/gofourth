@@ -4,8 +4,8 @@
         width="500" height="500"></canvas>
     <div class="main-cp-container">
       <div class="main-cp-header">
-        <a href="#" ng-click="uiState.setState('dashboard')">Dashboard</a>
-        <a href="#" ng-click="uiState.setState('browse')">Browse Games</a>
+        <a href="#" ng-click="uiState.setState('dashboard')" ng-class="{ 'main-cp-header_item--active': uiState.is('dashboard') }">Dashboard</a>
+        <a href="#" ng-click="uiState.setState('browse')" ng-class="{ 'main-cp-header_item--active': uiState.is('browse') }">Browse Games</a>
       </div>
       <section class="main-cp-content">
         <div ng-show="uiState.getState() == 'dashboard'">
@@ -22,6 +22,7 @@
           <input type="text" style="width:300px;" class="form-control" placeholder="Browse games..." ng-model="browseQuery">
           <br>
           <div class="game-choice"
+            ng-class="{ 'game-choice--active': activeGame.id === game.id }"
             ng-repeat="game in gameChoices | filter: { name: browseQuery }"
             ng-click="actions.activateGame(game)">
             <h3 class="game-choice_name">{{game.name}}</h3>

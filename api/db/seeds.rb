@@ -1,7 +1,7 @@
 # Seeds
 
 # Game 1
-g1 = Game.create(name: "Math", description: "Simple math problems.")
+g1 = Game.create(name: "Mathematics", description: "Solve fun math problems.")
 
 l1 = Level.create(question: "sqrt(5! - (-1))", game: g1)
 Answer.create(label: "22", level: l1)
@@ -64,7 +64,7 @@ Answer.create(label: "4", level: l10, is_correct: true)
 Answer.create(label: "1", level: l10)
 
 # Game 2
-g2 = Game.create(name: "U.S. Presidents", description: "Order the U.S. Presidents!")
+g2 = Game.create(name: "U.S. Presidents", description: "Order the U.S. Presidents.")
 
 l1 = Level.create(question: "George Washington", game: g2)
 Answer.create(label: "2", level: l1)
@@ -125,6 +125,132 @@ Answer.create(label: "6", level: l10)
 Answer.create(label: "36", level: l10)
 Answer.create(label: "10", level: l10, is_correct: true)
 Answer.create(label: "15", level: l10)
+
+# Game 3
+g3 = Game.create(name: "English Grammar", description: "Choose the part of speech.")
+
+l1 = Level.create(question: "beautiful", game: g3)
+Answer.create(label: "adjective", level: l1, is_correct: true)
+Answer.create(label: "adverb", level: l1)
+Answer.create(label: "pronoun", level: l1)
+Answer.create(label: "verb", level: l1)
+
+l2 = Level.create(question: "table", game: g3)
+Answer.create(label: "adverb", level: l2)
+Answer.create(label: "verb", level: l2, is_correct: true)
+Answer.create(label: "interjection", level: l2)
+Answer.create(label: "pronoun", level: l2)
+
+l3 = Level.create(question: "science", game: g3)
+Answer.create(label: "verb", level: l3)
+Answer.create(label: "preposition", level: l3)
+Answer.create(label: "conjunction", level: l3)
+Answer.create(label: "adjective", level: l3, is_correct: true)
+
+l4 = Level.create(question: "giraffe", game: g3)
+Answer.create(label: "interjection", level: l4)
+Answer.create(label: "noun", level: l4, is_correct: true)
+Answer.create(label: "adverb", level: l4)
+Answer.create(label: "gerund", level: l4)
+
+l5 = Level.create(question: "flying", game: g3)
+Answer.create(label: "conjunction", level: l5)
+Answer.create(label: "gerund", level: l5, is_correct: true)
+Answer.create(label: "adverb", level: l5)
+Answer.create(label: "verb", level: l5)
+
+l6 = Level.create(question: "because", game: g3)
+Answer.create(label: "adverb", level: l6)
+Answer.create(label: "verb", level: l6)
+Answer.create(label: "conjunction", level: l6, is_correct: true)
+Answer.create(label: "interjection", level: l6)
+
+l7 = Level.create(question: "wow!", game: g3)
+Answer.create(label: "adverb", level: l7)
+Answer.create(label: "adjective", level: l7)
+Answer.create(label: "interjection", level: l7, is_correct: true)
+Answer.create(label: "conjunction", level: l7)
+
+l8 = Level.create(question: "amaze", game: g3)
+Answer.create(label: "noun", level: l8)
+Answer.create(label: "pronoun", level: l8)
+Answer.create(label: "verb", level: l8, is_correct: true)
+Answer.create(label: "adjective", level: l8)
+
+l9 = Level.create(question: "we", game: g3)
+Answer.create(label: "noun", level: l9)
+Answer.create(label: "preposition", level: l9)
+Answer.create(label: "pronoun", level: l9, is_correct: true)
+Answer.create(label: "conjunction", level: l9)
+
+l10 = Level.create(question: "Mary", game: g3)
+Answer.create(label: "collective noun", level: l10)
+Answer.create(label: "compound noun", level: l10)
+Answer.create(label: "proper noun", level: l10, is_correct: true)
+Answer.create(label: "pronoun", level: l10)
+
+# Game 4
+g4 = Game.create(name: "World Geography", description: "Identify the continent.")
+
+l1 = Level.create(question: "Canada", game: g4)
+Answer.create(label: "North America", level: l1, is_correct: true)
+Answer.create(label: "Asia", level: l1)
+Answer.create(label: "Australia", level: l1)
+Answer.create(label: "South America", level: l1)
+
+l2 = Level.create(question: "Zimbabwe", game: g4)
+Answer.create(label: "Asia", level: l2)
+Answer.create(label: "Africa", level: l2, is_correct: true)
+Answer.create(label: "Antarctica", level: l2)
+Answer.create(label: "South America", level: l2)
+
+l3 = Level.create(question: "Denmark", game: g4)
+Answer.create(label: "North America", level: l3)
+Answer.create(label: "Asia", level: l3)
+Answer.create(label: "Africa", level: l3)
+Answer.create(label: "Europe", level: l3, is_correct: true)
+
+l4 = Level.create(question: "Venezuela", game: g4)
+Answer.create(label: "Australia", level: l4)
+Answer.create(label: "South America", level: l4, is_correct: true)
+Answer.create(label: "Europe", level: l4)
+Answer.create(label: "Asia", level: l4)
+
+l5 = Level.create(question: "Costa Rica", game: g4)
+Answer.create(label: "South America", level: l5)
+Answer.create(label: "North America", level: l5, is_correct: true)
+Answer.create(label: "Africa", level: l5)
+Answer.create(label: "Asia", level: l5)
+
+l6 = Level.create(question: "New Zealand", game: g4)
+Answer.create(label: "Europe", level: l6)
+Answer.create(label: "Australia", level: l6)
+Answer.create(label: "None", level: l6, is_correct: true)
+Answer.create(label: "Asia", level: l6)
+
+l7 = Level.create(question: "Burkina Faso", game: g4)
+Answer.create(label: "Europe", level: l7)
+Answer.create(label: "Asia", level: l7)
+Answer.create(label: "Africa", level: l7, is_correct: true)
+Answer.create(label: "South America", level: l7)
+
+l8 = Level.create(question: "Vatican City", game: g4)
+Answer.create(label: "Africa", level: l8)
+Answer.create(label: "Asia", level: l8)
+Answer.create(label: "Europe", level: l8, is_correct: true)
+Answer.create(label: "North America", level: l8)
+
+l9 = Level.create(question: "Maldives", game: g4)
+Answer.create(label: "Africa", level: l9)
+Answer.create(label: "South America", level: l9)
+Answer.create(label: "Asia", level: l9, is_correct: true)
+Answer.create(label: "Europe", level: l9)
+
+l10 = Level.create(question: "Monaco", game: g4)
+Answer.create(label: "Asia", level: l10)
+Answer.create(label: "Africa", level: l10)
+Answer.create(label: "Europe", level: l10, is_correct: true)
+Answer.create(label: "Australia", level: l10)
 
 
 puts "------------------------------"
