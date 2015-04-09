@@ -1,21 +1,18 @@
 // SESSION SERVICE
 
-GF.factory("SessionService", function($http) {
-  var currentUser = {};
-
+GF.factory("SessionService", function($rootScope) {
   return {
-    createCurrentUser: function(email, token) {
-      currentUser.email = email;    
-      currentUser.token = token;
-      currentUser.signedIn = true;
+    currentUser: null,
+
+    createCurrentUser: function(opts) {
+      this.currentUser = new MODELS.CurrentUser(opts);
+      $rootScope.currentUser = this.currentUser;
+      console.log(this.currentUser);
     },
 
     destroyCurrentUser: function() {
-      currentUser = {}; 
-    },
-
-    currentUser: function() {
-      return currentUser; 
+      this.currentUser = null;
+      delete $rootScope.currentUser;
     }
   };
 });

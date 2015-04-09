@@ -9,7 +9,7 @@
       </div>
       <section class="main-cp-content">
         <div ng-show="uiState.getState() == 'dashboard'">
-          <div ng-hide="currentUser.signedIn" class="no-session-content">
+          <div ng-hide="currentUser" class="no-session-content">
             <p>Sign in to save games and create your own!</p>
           </div>
           <div class="db-recent-game-container" ng-repeat="game in recentGames">

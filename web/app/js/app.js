@@ -11,6 +11,9 @@ var APP_DEPENDENCIES = [
   'ng-token-auth'
 ];
 
+// Namespace models
+var MODELS = {};
+
 var GF = angular.module("app", APP_DEPENDENCIES);
 
 GF.config(function($authProvider, SettingsConst) {
@@ -21,3 +24,10 @@ GF.config(function($authProvider, SettingsConst) {
     }
   });
 });
+
+GF.run(function($rootScope, AuthenticationService) {
+  $rootScope.$on('$routeChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    AuthenticationService.validateUser();
+  });
+});
+

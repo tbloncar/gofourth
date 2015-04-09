@@ -1,55 +1,16 @@
 <nav class="main-nav">
-  <a href="#" ng-click="showSignInForm()" ng-hide="currentUser.signedIn">
-    <span class="sign-in-btn-label">Sign In</span>
+  <a href="#" class="sign-in-btn" ng-click="signIn()" ng-hide="currentUser">
+    <span class="sign-in-btn_label">Sign In w/ Twitter</span>
   </a>
-  <a href="#" ng-click="showRegistrationForm()" ng-hide="currentUser.signedIn">
-    <span class="sign-in-btn-label">Register</span>
+  <a href="#" class="" ng-click="signOut()" ng-show="currentUser">
+    <span class="sign-in-btn_label">Sign Out</span>
   </a>
-  <span href="#" class="dropdown" ng-show="currentUser.signedIn">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{currentUser.email}}</a>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="#">Action</a></li>
-      <li><a href="#">Another action</a></li>
-      <li><a href="#">Something else here</a></li>
-      <li class="divider"></li>
-      <li><a href="#">Separated link</a></li>
-    </ul>
-  </span>
-  <script type="text/ng-template" id="gf-sign-in-modal.html">
-    <div class="modal-header">
-        <h3 class="modal-title">Sign In</h3>
-    </div>
-    <div class="modal-body">
-      <form ng-submit="signIn()" class="modal-form">
-        <input type="email" placeholder="email" class="form-control" ng-model="session.email">
-        <input type="password" placeholder="password" class="form-control" ng-model="session.password">
-        <p class="form-error" ng-show="display.signInFormError">
-          {{display.signInFormError}} 
-        </p>
-        <input type="submit" class="btn-submit" value="{{display.signInBtnText}}"/>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <a href="#">Forgot password?</a>
-    </div>
-  </script>
-  <script type="text/ng-template" id="gf-register-modal.html">
-    <div class="modal-header">
-      <h3 class="modal-title">Create Account</h3>
-    </div>
-    <div class="modal-body">
-      <form ng-submit="register()" class="modal-form">
-        <input type="email" placeholder="email" class="form-control" ng-model="registration.email">
-        <input type="password" placeholder="password" class="form-control" ng-model="registration.password">
-        <p class="form-error" ng-show="display.registerFormError">
-          {{display.registerFormError}} 
-        </p>
-        <input type="submit" class="btn-submit" value="{{display.registerBtnText}}"/>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <a href="#">Privacy Policy</a>
-    </div>
-  </script>
+  <!--<span href="#" class="dropdown" ng-show="currentUser">-->
+    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+      <!--@{{.nickname}}</a>-->
+    <!--<ul class="dropdown dropdown-menu" role="menu">-->
+      <!--<li><a href="#">Sign Out</a></li>-->
+    <!--</ul>-->
+  <!--</span>-->
 </nav>
 
