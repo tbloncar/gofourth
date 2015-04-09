@@ -286,6 +286,10 @@ body {
   display: inline-block;
   padding: 10px;
   text-align: center;
+
+  &:last-of-type {
+    border-right: none; 
+  }
 }
 
 .db-recent-game-inline--index {
@@ -293,12 +297,17 @@ body {
 }
 
 .db-recent-game-inline--name {
-  width: 150px;
+  width: 180px;
 }
 
 .db-recent-game-inline--score {
   width: 120px;
 }
+
+.db-recent-game-inline--time {
+  width: 180px;
+}
+
 
 /* : browse games
 --------------------------------------*/

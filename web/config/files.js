@@ -14,6 +14,7 @@ module.exports = function(lineman) {
         "vendor/js/jquery-1.11.0.min.js",
         "vendor/js/angular.js",
         "vendor/js/angular-cookie.js",
+        "vendor/js/moment.js",
         "vendor/js/**/*.js"
       ],
       app: [

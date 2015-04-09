@@ -8,7 +8,8 @@ var APP_DEPENDENCIES = [
   'ngResource',
   'ngRoute',
   'ui.bootstrap',
-  'ng-token-auth'
+  'ng-token-auth',
+  'angularMoment'
 ];
 
 // Namespace models

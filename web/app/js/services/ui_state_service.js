@@ -2,8 +2,10 @@
 
 GF.factory("UIStateService", function() {
   var state = {
-    dashboard: true,
-    browse: false
+    scoreboard: true,
+    browse: false,
+    created: false,
+    create: false
   };
 
   return {

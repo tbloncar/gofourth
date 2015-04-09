@@ -4,18 +4,28 @@
         width="500" height="500"></canvas>
     <div class="main-cp-container">
       <div class="main-cp-header">
-        <a href="#" ng-click="uiState.setState('dashboard')" ng-class="{ 'main-cp-header_item--active': uiState.is('dashboard') }">Dashboard</a>
-        <a href="#" ng-click="uiState.setState('browse')" ng-class="{ 'main-cp-header_item--active': uiState.is('browse') }">Browse Games</a>
+        <a href="#" ng-click="uiState.setState('scoreboard')"
+          ng-class="{ 'main-cp-header_item--active': uiState.is('scoreboard') }">Scoreboard</a>
+        <a href="#" ng-click="uiState.setState('browse')"
+          ng-class="{ 'main-cp-header_item--active': uiState.is('browse') }">Browse Games</a>
+        <a href="#" ng-click="uiState.setState('created')"
+          ng-class="{ 'main-cp-header_item--active': uiState.is('created') }"
+          ng-show="currentUser">Your Games</a>
+        <a href="#" ng-click="uiState.setState('create')"
+          ng-class="{ 'main-cp-header_item--active': uiState.is('create') }"
+          ng-show="currentUser">Create Game</a>
       </div>
       <section class="main-cp-content">
-        <div ng-show="uiState.getState() == 'dashboard'">
-          <div ng-hide="currentUser" class="no-session-content">
-            <p>Sign in to save games and create your own!</p>
+        <div ng-show="uiState.getState() == 'scoreboard'">
+          <div ng-hide="recentGames.length" class="no-session-content">
+            <p>Begin playing to see your scores here!</p>
           </div>
           <div class="db-recent-game-container" ng-repeat="game in recentGames">
             <span class="db-recent-game-inline db-recent-game-inline--index">{{$index + 1}}</span>
             <span class="db-recent-game-inline db-recent-game-inline--name">{{game.name}}</span>
             <span class="db-recent-game-inline db-recent-game-inline--score">{{game.score}}</span>
+            <span class="db-recent-game-inline db-recent-game-inline--time" am-time-ago="game.timestamp"></span>
+            <span class="db-recent-game-inline db-recent-game-inline--actions"></span>
           </div>
         </div>
         <div ng-show="uiState.getState() == 'browse'">
