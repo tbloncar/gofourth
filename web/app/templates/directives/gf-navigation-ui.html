@@ -2,6 +2,7 @@
   <a href="#" class="sign-in-btn" ng-click="signIn()" ng-hide="currentUser">
     <span class="sign-in-btn_label">Sign In w/ Twitter</span>
   </a>
+  <span class="main-nav_welcome" ng-show="currentUser">Howdy, @{{currentUser.nickname}}!</span>
   <a href="#" class="" ng-click="signOut()" ng-show="currentUser">
     <span class="sign-in-btn_label">Sign Out</span>
   </a>
