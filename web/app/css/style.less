@@ -19,8 +19,66 @@
 /* : mixins
 --------------------------------------*/
 
+.square(@dimension) {
+  height: @dimension;
+  width: @dimension;
+}
+
+.fancy-checkbox() {
+  display: none; 
+
+  + label {
+    margin: 0; 
+
+    span {
+      background-color: rgba(0,0,0,0.3);
+      border: 2px solid #bbb;
+      display: block; 
+      margin-top: 3px;
+      .square(27px);
+
+      &:hover {
+        cursor: pointer; 
+      }
+    }
+  }
+  
+  &:checked {
+    + label span {
+      background-color: fade(@c-orange, 50%); 
+    } 
+  }
+}
+
 /* : ui
 --------------------------------------*/
+
+input[type=checkbox] {
+  .fancy-checkbox();
+}
+
+.transparent-btn {
+  background-color: rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+  color: #fff;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 100;
+  line-height: 50px; 
+  margin-right: 15px;
+  margin-top: 5px;
+  padding: 0 25px;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+  transition: background 1s;
+
+  &:hover {
+    background-color: rgba(0,0,0,0.3);  
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
 
 .form-control {
   border: 2px solid #bbb;
@@ -31,17 +89,36 @@
     box-shadow: none;
     outline: none; 
   }
+
+  &[type=text] {
+    background-color: rgba(0,0,0,0.3); 
+    font-weight: 100;
+    color: #fff;
+  }
 }
 
 .sweet-alert {
-  border: 5px solid #ccc;
+  background-color: rgba(0,0,0,0.7);
+  border: 3px solid #ddd;
   border-radius: 0;
   font-family: @ff-oswald;
   padding: 0 10px 15px;
 
-  button {
-    border: 1px solid darken(rgb(174, 222, 244), 1%);
+  h2 {
+    color: #fff; 
+    font-size: 24px;
+    font-weight: 100;
+  }
+
+  button.confirm {
+    background: fade(@c-orange, 60%) !important;
+    border: 1px solid #fff;
     border-radius: 0; 
+    font-weight: 100;
+
+    &:hover {
+      background-color: fade(@c-orange, 95%) !important;
+    }
   }
 }
 
@@ -359,4 +436,40 @@ body {
 
 .game-choice_description {
   margin-bottom: 0;
+}
+
+/* : create game
+--------------------------------------*/
+
+.gf-create-game {
+  border: 1px solid #444;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+  margin-top: 10px;
+  padding: 15px;
+
+  .form-group {
+    label {
+      font-size: 18px;
+      font-weight: 100; 
+    } 
+  }
+}
+
+.gf-create-game_header {
+  border-bottom: 1px solid #555;
+  margin-bottom: 10px;
+  padding-bottom: 15px;
+}
+
+.level-answer {
+  margin-bottom: 15px;
+}
+
+.level-answer_correct {
+  text-align: center;
+
+  input[type=checkbox] {
+    margin: 0 auto;
+    .fancy-checkbox();
+  }
 }

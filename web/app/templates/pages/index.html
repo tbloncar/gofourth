@@ -26,7 +26,7 @@
             <span class="db-recent-game-inline db-recent-game-inline--score">{{game.score}}</span>
             <span class="db-recent-game-inline db-recent-game-inline--time" am-time-ago="game.timestamp"></span>
             <span class="db-recent-game-inline db-recent-game-inline--actions">
-              <a href="javascript:void(0)" ng-click="removeRecentGame($index)"> 
+              <a href="javascript:void(0)" ng-click="actions.removeRecentGame($index)"> 
                 <i class="glyphicon glyphicon-remove"></i>
               </a>
             </span>
@@ -42,6 +42,11 @@
             <h3 class="game-choice_name">{{game.name}}</h3>
             <p class="game-choice_description">{{game.description}}</p>
           </div>
+        </div>
+        <div ng-show="uiState.getState() == 'created'">
+        </div>
+        <div ng-show="uiState.getState() == 'create'">
+          <div gf-create-game></div>
         </div>
       </section>
     </div>

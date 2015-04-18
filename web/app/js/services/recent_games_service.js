@@ -15,6 +15,10 @@ GF.factory('RecentGamesService', function($rootScope) {
       $rootScope.$apply();
     },
 
+    removeGame: function(index) {
+      games.splice(index, 1); 
+    },
+
     getGames: function() {
       return games; 
     }

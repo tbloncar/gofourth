@@ -19,6 +19,10 @@ GF.controller('ApplicationCtrl', function ($scope, UIStateService, RecentGamesSe
     activateGame: function(game) {
       console.log(game);
       $scope.activeGame = game; 
+    },
+
+    removeRecentGame: function(index) {
+      RecentGamesService.removeGame(index);    
     }
   };
 });
