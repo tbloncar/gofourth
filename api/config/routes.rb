@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     scope module: :v1, constraints: APIConstraints.new(version: 1, default: true) do
-      resources :games, only: [:index]
+      resources :games, only: [:index, :create]
     end
   end
 end

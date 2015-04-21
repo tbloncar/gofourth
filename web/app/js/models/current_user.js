@@ -5,4 +5,5 @@ MODELS.CurrentUser = function CurrentUser(options) {
 
   this.nickname = opts.nickname;
   this.name = opts.name;
+  this.games = opts.games || [];
 };

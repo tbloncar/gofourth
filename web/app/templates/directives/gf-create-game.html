@@ -27,6 +27,39 @@
       </form>
     </div>
   </div>
+  <div class="gf-create-game" ng-repeat="level in newGame.levels">
+    <div class="gf-create-game_header">
+      <h2>Level {{$index + 1}}</h2>
+      <a class="gf-create-game_remove-level" href="javascript:void(0)" ng-click="removeLevel($index)">
+        <i class="glyphicon glyphicon-remove"></i>
+      </a>
+    </div>
+    <div>
+      <form class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="question">Question</label>
+            <input type="text" id="question-{{$index}}" class="form-control" placeholder="Question" ng-model="level.question">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-6" ng-repeat="answer in level.answers">
+            <div class="row level-answer">
+              <div class="col-md-8">
+                <label>Answer</label>
+                <input type="text" class="form-control" placeholder="Answer" ng-model="answer.label" ng-maxlength="30">
+              </div>
+              <div class="col-md-4 level-answer_correct">
+                <label for="">Correct?</label>
+                <input type="checkbox" id="answer-{{$parent.$index}}-{{$index}}" ng-model="answer.is_correct">
+                <label for="answer-{{$parent.$index}}-{{$index}}"><span></span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   <div class="gf-create-game">
     <div class="gf-create-game_header">
       <h2>Add Level</h2>

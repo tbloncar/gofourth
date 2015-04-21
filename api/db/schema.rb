@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20150407025709) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "answers", force: true do |t|
+  create_table "answers", force: :cascade do |t|
     t.string   "label"
     t.boolean  "is_correct", default: false
     t.integer  "level_id"
@@ -26,14 +26,16 @@ ActiveRecord::Schema.define(version: 20150407025709) do
 
   add_index "answers", ["level_id"], name: "index_answers_on_level_id", using: :btree
 
-  create_table "games", force: true do |t|
+  create_table "games", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
+    t.boolean  "is_public",   default: false
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "levels", force: true do |t|
+  create_table "levels", force: :cascade do |t|
     t.text     "question"
     t.integer  "game_id"
     t.datetime "created_at"
@@ -42,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150407025709) do
 
   add_index "levels", ["game_id"], name: "index_levels_on_game_id", using: :btree
 
-  create_table "plays", force: true do |t|
+  create_table "plays", force: :cascade do |t|
     t.integer  "score"
     t.integer  "game_id"
     t.integer  "user_id"
@@ -52,7 +54,7 @@ ActiveRecord::Schema.define(version: 20150407025709) do
 
   add_index "plays", ["game_id", "user_id"], name: "index_plays_on_game_id_and_user_id", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

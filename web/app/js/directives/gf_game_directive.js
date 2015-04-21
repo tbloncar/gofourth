@@ -351,9 +351,12 @@ function Game(name, $elm, scope, gameLevels, recentGamesService) {
   function update() {
     switch(state.getState()) {
       case gameState.START:
-        if(keydown.space) {
-          resetGame();
-          state.toPlay();
+        // Is canvas focused?
+        if($elm[0] === document.activeElement) {
+          if(keydown.space) {
+            resetGame();
+            state.toPlay();
+          }
         }
         break;
       case gameState.PLAY:
@@ -375,14 +378,19 @@ function Game(name, $elm, scope, gameLevels, recentGamesService) {
           addRecentGame();   
         }
         if(score > topScore) setTopScore(score);
-        if(keydown.p) {
-          resetGame();
-          state.toPlay();
+
+        // Is canvas focused?
+        if($elm[0] === document.activeElement) {
+          if(keydown.p) {
+            resetGame();
+            state.toPlay();
+          }
+          if(keydown.m) {
+            state.toStart();
+            resetGame();
+          }
         }
-        if(keydown.m) {
-          state.toStart();
-          resetGame();
-        }
+
         break;
     }
   }

@@ -1,13 +1,12 @@
 // CREATE GAME DIRECTIVE
 
-GF.directive("gfCreateGame", function(SessionService) {
+GF.directive("gfCreateGame", function(SessionService, GameResource) {
 
   return {
     restrict: 'A',
     replace: true,
     templateUrl: 'directives/gf-create-game.html',
     link: function(scope, $elm, $attrs) {
-
       function newLevelToLevel(l) {
         var level = new MODELS.Level(); 
 
@@ -24,12 +23,69 @@ GF.directive("gfCreateGame", function(SessionService) {
       scope.newGame = new MODELS.Game();
       scope.newLevel = {};
 
-      scope.setGameDetails = function() {
+      scope.createGame = function() {
+        var isError, errorMessage;
+
         if(!scope.newGame.name || !scope.newGame.description) {
           return swal('Provide a name and description!');           
         } 
 
-        scope.stage = 2;
+        if(!scope.newGame.levels.length) {
+          return swal('Please add at least one level!'); 
+        }
+
+        isError = scope.newGame.levels.some(function(l, index) {
+          var n = index + 1;
+
+          if(!l.question) {
+            errorMessage = 'Level ' + n + ' must have a question!'; 
+            return true;
+          }
+
+          if(!l.answers[0].label || !l.answers[1].label || 
+             !l.answers[2].label || !l.answers[3].label) {
+            errorMessage = 'Please provide four answers for Level ' + n + '!'; 
+            return true;
+          }
+
+          if(!l.answers[0].is_correct && !l.answers[1].is_correct &&
+             !l.answers[2].is_correct && !l.answers[3].is_correct) {
+            errorMessage = 'Please mark at least one answer as correct for Level ' + n + '!'; 
+            return true;
+          }
+        });
+
+        if(isError) {
+          return swal(errorMessage); 
+        }
+
+        GameResource.create({
+          game: scope.newGame.toJSON() 
+        }).$promise.then(
+          function(resp) {
+            SessionService.currentUser.games.push(new MODELS.Game(resp)); 
+            scope.newGame = new MODELS.Game();
+            swal('You created a game!');
+          },
+          function(resp) {
+            swal('Hm. Something went awry.'); 
+          }
+        );
+      };
+
+      scope.cancelGame = function() {
+        swal({
+          title: 'Discard this game?',
+          showCancelButton: true,
+          closeOnConfirm: true,
+          closeOnCancel: true,
+        }, function(confirmed) {
+          if(confirmed) {
+            scope.$apply(function() {
+              scope.newGame = new MODELS.Game();    
+            });
+          } 
+        });
       };
 
       scope.addLevel = function() {
@@ -43,14 +99,17 @@ GF.directive("gfCreateGame", function(SessionService) {
           return swal('Please provide four answers!'); 
         }
 
-        console.log(l);
-
         if(!l.answer1_iscorrect && !l.answer2_iscorrect &&
           !l.answer3_iscorrect && !l.answer4_iscorrect) {
-          return swal('Please mark at least once answer as correct!'); 
+          return swal('Please mark at least one answer as correct!'); 
         }
 
         scope.newGame.levels.push(newLevelToLevel(l));
+        scope.newLevel = {};
+      };
+
+      scope.removeLevel = function(index) {
+        scope.newGame.levels.splice(index, 1); 
       };
     }
  };

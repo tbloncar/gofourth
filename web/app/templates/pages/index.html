@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <canvas data-gf-game class="game-container"
-        width="500" height="500"></canvas>
+        width="500" height="500" tabindex="1"></canvas>
     <div class="main-cp-container">
       <div class="main-cp-header">
         <a href="#" ng-click="uiState.setState('scoreboard')"
@@ -44,6 +44,15 @@
           </div>
         </div>
         <div ng-show="uiState.getState() == 'created'">
+          <input type="text" style="width:300px;" class="form-control" placeholder="Browse games..." ng-model="browseQueryCreated">
+          <br>
+          <div class="game-choice"
+            ng-class="{ 'game-choice--active': activeGame.id === game.id }"
+            ng-repeat="game in currentUser.games | filter: { name: browseQueryCreated }"
+            ng-click="actions.activateGame(game)">
+            <h3 class="game-choice_name">{{game.name}}</h3>
+            <p class="game-choice_description">{{game.description}}</p>
+          </div>
         </div>
         <div ng-show="uiState.getState() == 'create'">
           <div gf-create-game></div>

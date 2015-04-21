@@ -1,7 +1,7 @@
 # Seeds
 
 # Game 1
-g1 = Game.create(name: "Mathematics", description: "Solve fun math problems.")
+g1 = Game.create(name: "Mathematics", description: "Solve fun math problems.", is_public: true)
 
 l1 = Level.create(question: "sqrt(5! - (-1))", game: g1)
 Answer.create(label: "22", level: l1)
@@ -64,7 +64,7 @@ Answer.create(label: "4", level: l10, is_correct: true)
 Answer.create(label: "1", level: l10)
 
 # Game 2
-g2 = Game.create(name: "U.S. Presidents", description: "Order the U.S. Presidents.")
+g2 = Game.create(name: "U.S. Presidents", description: "Order the U.S. Presidents.", is_public: true)
 
 l1 = Level.create(question: "George Washington", game: g2)
 Answer.create(label: "2", level: l1)
@@ -127,7 +127,7 @@ Answer.create(label: "10", level: l10, is_correct: true)
 Answer.create(label: "15", level: l10)
 
 # Game 3
-g3 = Game.create(name: "English Grammar", description: "Choose the part of speech.")
+g3 = Game.create(name: "English Grammar", description: "Choose the part of speech.", is_public: true)
 
 l1 = Level.create(question: "beautiful", game: g3)
 Answer.create(label: "adjective", level: l1, is_correct: true)
@@ -190,7 +190,7 @@ Answer.create(label: "proper noun", level: l10, is_correct: true)
 Answer.create(label: "pronoun", level: l10)
 
 # Game 4
-g4 = Game.create(name: "World Geography", description: "Identify the continent.")
+g4 = Game.create(name: "World Geography", description: "Identify the continent.", is_public: true)
 
 l1 = Level.create(question: "Canada", game: g4)
 Answer.create(label: "North America", level: l1, is_correct: true)
